@@ -1,2 +1,14 @@
-Présentation du projet:
-Ce projet vise à informatiser la gestion des réservations de spectacles pour une société de production. Celle-ci administre un catalogue complet comprenant les spectacles, leurs auteurs, leurs metteurs en scène, les comédiens, ainsi que les lieux et les dates de représentation. Fonctionnalités pour les internautes Les internautes auront un accès libre au catalogue des spectacles, qui affichera les lieux ainsi que les prochaines dates de représentation. Ils pourront également effectuer des recherches avancées, trier et filtrer les lunettes pour affiner leurs résultats. Fonctionnalités pour les membres Les membres disposeront de fonctionnalités supplémentaires : Réserver des places pour une représentation spécifique. Consulter l'historique et les détails de leurs réservations. Modifier leurs informations personnelles dans leur espace utilisateur. Fonctionnalités pour les administrateurs Les administrateurs disposeront d'un back-office sécurisé pour gérer efficacement le catalogue. Les fonctionnalités incluent : Ajouter, modifier ou supprimer un spectacle manuellement. Importer et exporter des données au format CSV. Mettre à jour automatiquement la liste des spectacles grâce aux nouveautés publiées via un service Web tiers.
+# Projet reservations
+
+#### Présentation du projet
+
+Le projet consiste à informatiser la gestion des réservations de spectacles d’une société de production. Celle-ci gère un catalogue reprenant des spectacles, leurs auteurs et leurs metteurs en scènes, les comédiens, ainsi que les lieux et les dates de représentations.
+
+L’internaute pourra consulter librement le catalogue des spectacles affichant le lieu et les prochaines dates de représentation.
+
+Il pourra effectuer des recherches, des tris et des filtres à travers les pages du catalogue.
+
+Le membre pourra réserver des places pour une représentation d’un spectacle, consulter la liste de ses réservations et modifier ses données de profil.
+
+L’administrateur pourra gérer son catalogue à travers un back-office sécurisé. Par exemple, il pourra ajouter, modifier et supprimer un spectacle manuellement, importer/exporter des données au format CSV, mais aussi mettre à jour la liste des spectacles grâce aux nouveautés publiées par un Web service tiers.
+
