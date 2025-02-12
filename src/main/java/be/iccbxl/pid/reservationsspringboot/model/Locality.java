@@ -1,40 +1,64 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
-@Table(name = "localities")
+@Table(name="localities")
 public class Locality {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-
-    @Setter
-    @Column(name = "postal_code", nullable = false)
     private String postalCode;
-
-    @Setter
-    @Column(nullable = false)
     private String locality;
 
-    // Constructeur par défaut nécessaire pour JPA
-    protected Locality() {}
+    @OneToMany( targetEntity=Location.class, mappedBy="locality" )
+    private List<Location> locations = new ArrayList<>();
+
+    protected Locality() { }
 
     public Locality(String postalCode, String locality) {
         this.postalCode = postalCode;
         this.locality = locality;
     }
 
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
+
+    public Locality addLocation(Location location) {
+        if(!this.locations.contains(location)) {
+            this.locations.add(location);
+            location.setLocality(this);
+        }
+
+        return this;
+    }
+
+    public Locality removeLocation(Location location) {
+        if(this.locations.contains(location)) {
+            this.locations.remove(location);
+            if(location.getLocality().equals(this)) {
+                location.setLocality(null);
+            }
+        }
+
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Locality [id=" + id + ", postalCode=" + postalCode + ", locality=" + locality + "]";
     }
+
 }
+
