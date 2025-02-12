@@ -1,23 +1,23 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
-
 import jakarta.persistence.*;
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Entity
 @Table(name="localities")
 public class Locality {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false, length = 10)
     private String postalCode;
+
+    @Column(nullable = false, length = 100)
     private String locality;
 
-    @OneToMany( targetEntity=Location.class, mappedBy="locality" )
+    @OneToMany(targetEntity = Location.class, mappedBy = "locality")
     private List<Location> locations = new ArrayList<>();
 
     protected Locality() { }
@@ -27,16 +27,41 @@ public class Locality {
         this.locality = locality;
     }
 
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getLocality() {
+        return locality;
     }
 
     public void setLocality(String locality) {
         this.locality = locality;
     }
 
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
     public Locality addLocation(Location location) {
-        if(!this.locations.contains(location)) {
+        if (!this.locations.contains(location)) {
             this.locations.add(location);
             location.setLocality(this);
         }
@@ -45,9 +70,9 @@ public class Locality {
     }
 
     public Locality removeLocation(Location location) {
-        if(this.locations.contains(location)) {
+        if (this.locations.contains(location)) {
             this.locations.remove(location);
-            if(location.getLocality().equals(this)) {
+            if (location.getLocality().equals(this)) {
                 location.setLocality(null);
             }
         }
@@ -59,6 +84,4 @@ public class Locality {
     public String toString() {
         return "Locality [id=" + id + ", postalCode=" + postalCode + ", locality=" + locality + "]";
     }
-
 }
-
