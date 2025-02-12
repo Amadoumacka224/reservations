@@ -1,6 +1,6 @@
 package be.iccbxl.pid.reservationsspringboot.controller;
 
-import java.util.List;
+//…
 
 import be.iccbxl.pid.reservationsspringboot.model.Locality;
 import be.iccbxl.pid.reservationsspringboot.service.LocalityService;
@@ -10,22 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
 @Controller
 public class LocalityController {
     @Autowired
     LocalityService service;
 
-    @GetMapping("/localities")
-    public String index2(Model model) {
-        List<Locality> localities = service.getAll();
-
-        model.addAttribute("localities", localities);
-        model.addAttribute("title", "Liste des localités");
-
-        return "locality/index";
-    }
+    //…
 
     @GetMapping("/localities/{id}")
     public String show(Model model, @PathVariable("id") String id) {
@@ -38,3 +28,4 @@ public class LocalityController {
     }
 
 }
+
