@@ -1,14 +1,17 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="localities")
+@Table(name = "localities")
+
+@NoArgsConstructor
 public class Locality {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 10)
@@ -20,44 +23,9 @@ public class Locality {
     @OneToMany(targetEntity = Location.class, mappedBy = "locality")
     private List<Location> locations = new ArrayList<>();
 
-    protected Locality() { }
-
     public Locality(String postalCode, String locality) {
         this.postalCode = postalCode;
         this.locality = locality;
-    }
-
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getLocality() {
-        return locality;
-    }
-
-    public void setLocality(String locality) {
-        this.locality = locality;
-    }
-
-    public List<Location> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
     }
 
     public Locality addLocation(Location location) {
@@ -65,7 +33,6 @@ public class Locality {
             this.locations.add(location);
             location.setLocality(this);
         }
-
         return this;
     }
 
@@ -76,10 +43,8 @@ public class Locality {
                 location.setLocality(null);
             }
         }
-
         return this;
     }
-
     @Override
     public String toString() {
         return "Locality [id=" + id + ", postalCode=" + postalCode + ", locality=" + locality + "]";
