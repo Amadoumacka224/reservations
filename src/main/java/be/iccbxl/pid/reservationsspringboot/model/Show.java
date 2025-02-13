@@ -1,76 +1,63 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
-import com.github.slugify.Slugify;
 import jakarta.persistence.*;
+import lombok.Getter;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "shows")
+@Table(name="shows")
 public class Show {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique=true)
     private String slug;
 
     private String title;
+
     private String description;
 
-    @Column(name = "poster_url")
+    @Column(name="poster_url")
     private String posterUrl;
 
-    /**
-     * Lieu de création du spectacle
-     */
     @ManyToOne
-    @JoinColumn(name = "location_id", nullable = true)
+    @JoinColumn(name="location_id")
     private Location location;
 
     private boolean bookable;
+
     private double price;
 
-    /**
-     * Date de création du spectacle
-     */
-    @Column(name = "created_at")
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
-    /**
-     * Date de modification du spectacle
-     */
-    @Column(name = "updated_at")
+    @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    public Show() { }
+    @Getter
+    @OneToMany(targetEntity=Representation.class, mappedBy="show")
+    private List<Representation> representations = new ArrayList<>();
 
-    public Show(String title, String description, String posterUrl, Location location, boolean bookable,
-                double price) {
-        Slugify slg = new Slugify();
-
-        this.slug = slg.slugify(title);
-        this.title = title;
-        this.description = description;
-        this.posterUrl = posterUrl;
-        this.location = location;
-        if (location != null) {
-            location.addShow(this);
-        }
-        this.bookable = bookable;
-        this.price = price;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = null;
+    public Show() {
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getSlug() {
         return slug;
     }
 
-    private void setSlug(String slug) {
+    public void setSlug(String slug) {
         this.slug = slug;
     }
 
@@ -80,8 +67,6 @@ public class Show {
 
     public void setTitle(String title) {
         this.title = title;
-        Slugify slg = new Slugify();
-        this.setSlug(slg.slugify(title));
     }
 
     public String getDescription() {
@@ -105,18 +90,7 @@ public class Show {
     }
 
     public void setLocation(Location location) {
-        // Remove from old location if it exists
-        if (this.location != null) {
-            this.location.removeShow(this);
-        }
-
-        // Set new location
         this.location = location;
-
-        // Add to new location if it exists
-        if (location != null) {
-            location.addShow(this);
-        }
     }
 
     public boolean isBookable() {
@@ -135,6 +109,14 @@ public class Show {
         this.price = price;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
@@ -143,22 +125,43 @@ public class Show {
         this.updatedAt = updatedAt;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public Show addRepresentation(Representation representation) {
+        if(!this.representations.contains(representation)) {
+            this.representations.add(representation);
+            representation.setShow(this);
+        }
+        return this;
+    }
+
+    public Show removeRepresentation(Representation representation) {
+        if(this.representations.contains(representation)) {
+            this.representations.remove(representation);
+            if(representation.getShow().equals(this)) {
+                representation.setShow(null);
+            }
+        }
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Show)) return false;
+        Show show = (Show) o;
+        return Objects.equals(slug, show.slug);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(slug);
     }
 
     @Override
     public String toString() {
-        return "Show [id=" + id
-                + ", slug=" + slug
-                + ", title=" + title
-                + ", description=" + description
-                + ", posterUrl=" + posterUrl
-                + ", location=" + location
-                + ", bookable=" + bookable
-                + ", price=" + price
-                + ", createdAt=" + createdAt
-                + ", updatedAt=" + updatedAt
-                + "]";
+        return "Show [id=" + id + ", slug=" + slug + ", title=" + title
+                + ", description=" + description + ", posterUrl=" + posterUrl + ", location="
+                + location + ", bookable=" + bookable + ", price=" + price
+                + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+                + ", representations=" + representations.size() + "]";
     }
 }
