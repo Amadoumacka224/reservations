@@ -1,167 +1,141 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
+import com.github.slugify.Slugify;
 import jakarta.persistence.*;
-import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name="shows")
 public class Show {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private int id;
 
-    @Column(unique=true)
+    @OneToMany(targetEntity=Representation.class, mappedBy="show")
+    private List<Representation> representations = new ArrayList<>();
     private String slug;
 
     private String title;
 
     private String description;
-
-    @Column(name="poster_url")
-    private String posterUrl;
-
+    /**
+     * Lieu de création du spectacle
+     */
     @ManyToOne
-    @JoinColumn(name="location_id")
+    @JoinColumn(name="location_id", nullable=true)
     private Location location;
+
+    private String posterUrl;
 
     private boolean bookable;
 
     private double price;
 
+    private String stripeProductId;
+
+    /**
+     * Date de création du spectacle
+     */
     @Column(name="created_at")
     private LocalDateTime createdAt;
 
+    /**
+     * Date de modification du spectacle
+     */
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    @Getter
-    @OneToMany(targetEntity=Representation.class, mappedBy="show")
-    private List<Representation> representations = new ArrayList<>();
+
+
+
+    public Show(String slug, String title, String description, Location location, String posterUrl, boolean bookable, double price, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        Slugify slg = new Slugify();
+        this.slug = slg.slugify(title);
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.posterUrl = posterUrl;
+        this.bookable = bookable;
+        this.price = price;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public Show() {
+
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getSlug() {
-        return slug;
+    public void setRepresentations(List<Representation> representations) {
+        this.representations = representations;
     }
 
     public void setSlug(String slug) {
         this.slug = slug;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getPosterUrl() {
-        return posterUrl;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public void setPosterUrl(String posterUrl) {
         this.posterUrl = posterUrl;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public boolean isBookable() {
-        return bookable;
-    }
-
     public void setBookable(boolean bookable) {
         this.bookable = bookable;
-    }
-
-    public double getPrice() {
-        return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public void setStripeProductId(String stripe_product_id) {
+        this.stripeProductId = stripe_product_id;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public Show addRepresentation(Representation representation) {
-        if(!this.representations.contains(representation)) {
-            this.representations.add(representation);
-            representation.setShow(this);
-        }
-        return this;
-    }
-
-    public Show removeRepresentation(Representation representation) {
-        if(this.representations.contains(representation)) {
-            this.representations.remove(representation);
-            if(representation.getShow().equals(this)) {
-                representation.setShow(null);
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Show)) return false;
-        Show show = (Show) o;
-        return Objects.equals(slug, show.slug);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(slug);
-    }
-
     @Override
     public String toString() {
-        return "Show [id=" + id + ", slug=" + slug + ", title=" + title
-                + ", description=" + description + ", posterUrl=" + posterUrl + ", location="
-                + location + ", bookable=" + bookable + ", price=" + price
-                + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
-                + ", representations=" + representations.size() + "]";
+        return "Show{" +
+                "id=" + id +
+                ", slug='" + slug + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", location=" + location +
+                ", posterUrl='" + posterUrl + '\'' +
+                ", bookable=" + bookable +
+                ", price=" + price +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
+
+    public void addArtistType(ArtistType artistType) {
+    }
+
+    public <E> List<E> getArtistTypes() {
+        return List.of();
     }
 }
