@@ -1,5 +1,4 @@
 package be.iccbxl.pid.reservationsspringboot.model;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
