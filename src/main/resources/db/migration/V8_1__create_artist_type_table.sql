@@ -22,4 +22,3 @@ ALTER TABLE `artist_type`
 
 ALTER TABLE `artist_type`
     ADD CONSTRAINT `artist_type_type_id_ 3060D1B6C54C8C93 _fk_artists_id` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT;
-

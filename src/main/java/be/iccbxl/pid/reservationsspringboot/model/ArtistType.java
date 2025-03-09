@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name="artist_type")
 public class ArtistType {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
@@ -85,7 +85,5 @@ public class ArtistType {
     }
 
 }
-
-
 
 
