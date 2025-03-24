@@ -88,4 +88,3 @@ public class ArtistApiController {
         return ResponseEntity.noContent().build();
     }
 }
-

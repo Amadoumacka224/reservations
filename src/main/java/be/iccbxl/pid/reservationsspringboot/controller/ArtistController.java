@@ -19,9 +19,6 @@ import be.iccbxl.pid.reservationsspringboot.model.Artist;
 import be.iccbxl.pid.reservationsspringboot.service.ArtistService;
 import jakarta.servlet.http.HttpServletRequest;
 
-
-
-
 @Controller
 public class ArtistController {
     @Autowired
@@ -112,9 +109,5 @@ public class ArtistController {
 
         return "redirect:/artists";
     }
-
-
-
 }
-
 
