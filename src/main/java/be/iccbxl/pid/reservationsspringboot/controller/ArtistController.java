@@ -1,19 +1,16 @@
 package be.iccbxl.pid.reservationsspringboot.controller;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import be.iccbxl.pid.reservationsspringboot.model.Artist;
 import be.iccbxl.pid.reservationsspringboot.service.ArtistService;
@@ -33,6 +30,29 @@ public class ArtistController {
 
         return "artist/index";
     }
+// Ajout en stage
+    @GetMapping("/json/artists")
+    @ResponseBody
+    public ResponseEntity<List<Map<String, Object>>> getAllArtistsJson() {
+        List<Artist> artists = service.getAllArtists();
+
+        List<Map<String, Object>> result = artists.stream().map(artist -> {
+            Map<String, Object> artistMap = new HashMap<>();
+            artistMap.put("id", artist.getId());
+            artistMap.put("firstname", artist.getFirstname());
+            artistMap.put("lastname", artist.getLastname());
+
+            // Ajoutez ici d'autres propriétés si nécessaire
+            // artistMap.put("property", artist.getProperty());
+
+            return artistMap;
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(result);
+    }
+
+
+
     @GetMapping("/artists/{id}")
     public String show(Model model, @PathVariable("id") long id) {
         Artist artist = service.getArtist(id);

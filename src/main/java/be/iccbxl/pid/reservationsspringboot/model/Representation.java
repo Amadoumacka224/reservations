@@ -1,5 +1,6 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import java.time.LocalDateTime;
@@ -33,6 +34,7 @@ public class Representation {
     /**
      * Liste des utilisateurs ayant réservé cette représentation
      */
+    //@JsonIgnore
     @ManyToMany(mappedBy = "representations")
     private List<User> users = new ArrayList<>();
 

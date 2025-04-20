@@ -1,9 +1,8 @@
 package be.iccbxl.pid.reservationsspringboot.model;
-
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 @Data
@@ -16,6 +15,7 @@ public class Artist {
     private String firstname;
     private String lastname;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "artists")
     private List<Type> types = new ArrayList<>();
 
