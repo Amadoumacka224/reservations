@@ -15,8 +15,8 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain configure(final HttpSecurity http) throws Exception {
         return http.cors(Customizer.withDefaults())
-                //.csrf(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable())	//Désactiver la protection des formulaires
+                .csrf(Customizer.withDefaults())
+                //.csrf(csrf -> csrf.disable())	//Désactiver la protection des formulaires
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/admin").hasRole("ADMIN");
                     auth.requestMatchers("/user").hasRole("MEMBER");

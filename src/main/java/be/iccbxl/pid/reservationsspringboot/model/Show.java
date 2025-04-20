@@ -1,4 +1,5 @@
 package be.iccbxl.pid.reservationsspringboot.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class Show {
     /**
      * Lieu de création du spectacle
      */
+
     @ManyToOne
     @JoinColumn(name="location_id", nullable=true)
     private Location location;

@@ -1,6 +1,7 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
