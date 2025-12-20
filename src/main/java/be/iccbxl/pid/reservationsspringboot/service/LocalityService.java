@@ -1,14 +1,24 @@
 package be.iccbxl.pid.reservationsspringboot.service;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 import be.iccbxl.pid.reservationsspringboot.model.Locality;
 import be.iccbxl.pid.reservationsspringboot.repository.LocalityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+=======
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 @Service
 public class LocalityService {
     @Autowired
@@ -43,5 +53,8 @@ public class LocalityService {
 
         repository.deleteById(indice);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 }

@@ -12,8 +12,12 @@
         <h2>Liste des artistes</h2>
         <ul th:unless="${#lists.isEmpty(type.artists)}">
             <li th:each="artist : ${type.artists}"
+<<<<<<< HEAD
                 th:text="|${artist.firstname} ${artist.lastname}|">Firstname Lastname
             </li>
+=======
+                th:text="|${artist.firstname} ${artist.lastname}|">Firstname Lastname</li>
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
         </ul>
 
         <nav><a th:href="@{/types}">Retour à l'index</a></nav>

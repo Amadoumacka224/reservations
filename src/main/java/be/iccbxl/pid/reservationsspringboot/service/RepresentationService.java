@@ -53,6 +53,11 @@ public class RepresentationService {
     public List<Representation> getFromShow(Show show) {
         return repository.findByShow(show);
     }
+<<<<<<< HEAD
 
 
 }
+=======
+}
+
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a

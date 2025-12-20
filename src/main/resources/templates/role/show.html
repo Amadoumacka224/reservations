@@ -2,6 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
       layout:decorate="~{layouts/main}">
 <head>
+<<<<<<< HEAD
     <title>Fiche d'un role</title>
 </head>
 <body>
@@ -14,3 +15,18 @@
 </div>
 </body>
 </html>
+=======
+  <title>Fiche d'un role</title>
+</head>
+<body>
+<div class="container">
+  <div layout:fragment="content">
+    <h1 th:text="${#strings.capitalize(role.role)}">Admin</h1>
+
+    <nav><a th:href="@{/roles}">Retour à l'index</a></nav>
+  </div>
+</div>
+</body>
+</html>
+
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a

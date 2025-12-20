@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INSERT INTO `reservations` (`id`, `user_id`, `booking_date`, `status`)
 VALUES (NULL, 1, '2025-01-15 10:00:00', 'confirmed'),
        (NULL, 2, '2025-01-15 10:00:00', 'confirmed'),
@@ -99,4 +100,9 @@ VALUES (NULL, 1, '2025-01-15 10:00:00', 'confirmed'),
        (NULL, 98, '2025-04-21 11:45:00', 'confirmed'),
        (NULL, 99, '2025-04-22 12:15:00', 'confirmed'),
        (NULL, 100, '2025-04-23 12:45:00', 'confirmed');
+=======
+INSERT INTO `reservations` (`id`, `user_id`, `representation_id`, `places`) VALUES
+                                                         (NULL, 2, 1, 3),
+                                                        (NULL, 2, 2, 5);
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 

@@ -1,12 +1,23 @@
 package be.iccbxl.pid.reservationsspringboot.model;
+<<<<<<< HEAD
 
 import com.github.slugify.Slugify;
 import jakarta.persistence.*;
+=======
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+<<<<<<< HEAD
+=======
+@Getter
+@Setter
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 @Table(name = "locations")
 public class Location {
     @Id
@@ -29,6 +40,7 @@ public class Location {
     @OneToMany(targetEntity = Show.class, mappedBy = "location")
     private List<Show> shows = new ArrayList<>();
 
+<<<<<<< HEAD
     @OneToMany(targetEntity = Representation.class, mappedBy = "location")
     private List<Representation> representations = new ArrayList<>();
 
@@ -137,6 +149,12 @@ public class Location {
         return representations;
     }
 
+=======
+    @Getter
+    @OneToMany(targetEntity = Representation.class, mappedBy = "location")
+    private List<Representation> representations = new ArrayList<>();
+
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
     public Location addRepresentation(Representation representation) {
         if (!this.representations.contains(representation)) {
             this.representations.add(representation);
@@ -157,6 +175,7 @@ public class Location {
         return this;
     }
 
+<<<<<<< HEAD
     public Integer getCapacity() {
         return capacity;
     }
@@ -179,4 +198,15 @@ public class Location {
                 ", representations=" + representations.size() +
                 '}';
     }
+=======
+    @Override
+    public String toString() {
+        return "Location [id=" + id + ", slug=" + slug + ", designation=" + designation
+                + ", address=" + address + ", locality=" + locality + ", website="
+                + website + ", phone=" + phone + ", shows=" + shows.size()
+                + ", representations=" + representations.size() + "]";
+    }
+
+
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 }

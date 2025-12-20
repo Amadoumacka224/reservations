@@ -1,4 +1,5 @@
 package be.iccbxl.pid.reservationsspringboot.model;
+<<<<<<< HEAD
 
 import com.github.slugify.Slugify;
 import jakarta.persistence.*;
@@ -44,16 +45,52 @@ public class Show {
             joinColumns = @JoinColumn(name = "show_id"),
             inverseJoinColumns = @JoinColumn(name = "price_id"))
     private List<Price> prices = new ArrayList<>();
+=======
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Data;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+@Entity
+@Data
+@Table(name="shows")
+public class Show {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+    @Column(unique=true)
+    private String slug;
+    private String title;
+    private String description;
+    @Column(name="poster_url")
+    private String posterUrl;
+    /**
+     * Lieu de création du spectacle
+     */
+
+    @ManyToOne
+    @JoinColumn(name="location_id", nullable=true)
+    private Location location;
+
+    private boolean bookable;
+    private double price;
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 
     /**
      * Date de création du spectacle
      */
+<<<<<<< HEAD
     @Column(name = "created_at", nullable = false, updatable = false)
+=======
+    @Column(name="created_at")
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
     private LocalDateTime createdAt;
 
     /**
      * Date de modification du spectacle
      */
+<<<<<<< HEAD
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
@@ -74,11 +111,18 @@ public class Show {
     @OneToMany(mappedBy = "show",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
+=======
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
+
+    @OneToMany(targetEntity=Representation.class, mappedBy="show")
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
     private List<Representation> representations = new ArrayList<>();
 
     @ManyToMany(mappedBy = "shows")
     private List<ArtistType> artistTypes = new ArrayList<>();
 
+<<<<<<< HEAD
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
@@ -234,27 +278,42 @@ public class Show {
     /**
      * Get the performances (artists in a type of collaboration) for the show
      */
+=======
+
+
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
     public List<ArtistType> getArtistTypes() {
         return artistTypes;
     }
 
     public Show addArtistType(ArtistType artistType) {
+<<<<<<< HEAD
         if (!this.artistTypes.contains(artistType)) {
             this.artistTypes.add(artistType);
             //artistType.addShow(this);
+=======
+        if(!this.artistTypes.contains(artistType)) {
+            this.artistTypes.add(artistType);
+            artistType.addShow(this);
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
         }
 
         return this;
     }
 
     public Show removeArtistType(ArtistType artistType) {
+<<<<<<< HEAD
         if (this.artistTypes.contains(artistType)) {
+=======
+        if(this.artistTypes.contains(artistType)) {
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
             this.artistTypes.remove(artistType);
             artistType.getShows().remove(this);
         }
 
         return this;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -296,3 +355,7 @@ public class Show {
     }
 
 }
+=======
+//…
+}
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a

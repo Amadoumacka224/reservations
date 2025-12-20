@@ -45,7 +45,11 @@ public class SpringSecurityConfig {
         System.out.println("Config de la sécurité en cours ...");
         return http.cors(Customizer.withDefaults())
                 .csrf(Customizer.withDefaults())
+<<<<<<< HEAD
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**", "/logout"))
+=======
+                //.csrf(csrf -> csrf.disable())	//Désactiver la protection des formulaires
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
                 .authorizeHttpRequests(auth -> {
 
                     auth.requestMatchers("/api/localities").permitAll();

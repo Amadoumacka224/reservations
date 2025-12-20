@@ -1,8 +1,13 @@
 package be.iccbxl.pid.reservationsspringboot.service;
+<<<<<<< HEAD
 
 import be.iccbxl.pid.reservationsspringboot.model.Location;
 import be.iccbxl.pid.reservationsspringboot.model.Show;
 import be.iccbxl.pid.reservationsspringboot.model.Tag;
+=======
+import be.iccbxl.pid.reservationsspringboot.model.Location;
+import be.iccbxl.pid.reservationsspringboot.model.Show;
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 import be.iccbxl.pid.reservationsspringboot.repository.ShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +51,7 @@ public class ShowService {
         repository.deleteById(indice);
     }
 
+<<<<<<< HEAD
     public void save(Show show) {
         repository.save(show);
     }
@@ -67,4 +73,9 @@ public class ShowService {
         return repository.findByTagsNotContaining(tag);
     }
 
+=======
+    public List<Show> getFromLocation(Location location) {
+        return repository.findByLocation(location);
+    }
+>>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 }
