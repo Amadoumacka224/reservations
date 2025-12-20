@@ -3,19 +3,15 @@ package be.iccbxl.pid.reservationsspringboot.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
-
     @GetMapping("/login")
     public String login(
-            @RequestParam(required=false) final Boolean loginRequired,
-            @RequestParam(required=false) final Boolean loginError,
-            @RequestParam(required=false) final Boolean logoutSuccess,
+            @RequestParam(required = false) final Boolean loginRequired,
+            @RequestParam(required = false) final Boolean loginError,
+            @RequestParam(required = false) final Boolean logoutSuccess,
             final Model model) {
 
         if (loginRequired == Boolean.TRUE) {

@@ -1,13 +1,12 @@
 package be.iccbxl.pid.reservationsspringboot.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import be.iccbxl.pid.reservationsspringboot.model.User;
+import be.iccbxl.pid.reservationsspringboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import be.iccbxl.pid.reservationsspringboot.model.User;
-import be.iccbxl.pid.reservationsspringboot.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -20,6 +19,9 @@ public class UserService {
         userRepository.findAll().forEach(users::add);
 
         return users;
+    }
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login); // sans Optional
     }
 
     public User getUser(long id) {
@@ -37,4 +39,5 @@ public class UserService {
     public void deleteUser(long id) {
         userRepository.deleteById(id);
     }
+
 }

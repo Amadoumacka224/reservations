@@ -1,18 +1,21 @@
 package be.iccbxl.pid.reservationsspringboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+@Data
+@NoArgsConstructor
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
     private String password;
@@ -20,85 +23,64 @@ public class User {
     private String lastname;
     private String email;
     private String langue;
-    private String role;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
     private LocalDateTime created_at;
 
-    protected User() {}
+    @ManyToMany(mappedBy = "users")
+    @JsonIgnore
+    private List<Role> roles = new ArrayList<>();
 
-    public User(String login, String firstname, String lastname, String role) {
-        this.login = login;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.role = role;
-        this.created_at = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    /**
+     * Toutes les réservations passées par cet utilisateur.
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Reservation> reservations = new ArrayList<>();
+
+    /**
+     * Retourne la liste des spectacles (Representation) réservés par cet utilisateur,
+     * en parcourant toutes ses Reservation → RepresentationReservation.
+     */
+    @Transient
+    public List<Representation> getRepresentations() {
+        return reservations.stream()
+                .flatMap(res -> res.getItems().stream())
+                .map(item -> item.getRepresentation())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
-    public Long getId() {
-        return id;
+    //pour commentaires
+    public boolean hasRole(UserRole role) {
+        return this.role == role;
     }
 
-    public String getLogin() {
-        return login;
+
+    // Méthode utilitaire pour lier une nouvelle réservation
+    public void addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+        reservation.setUser(this);
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void addRole(Role role) {
+        this.roles.add(role);
+        role.getUsers().add(this);
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getLangue() {
-        return langue;
-    }
-
-    public void setLangue(String langue) {
-        this.langue = langue;
-    }
-
-    public String getRole() {
-        return langue;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return created_at;
-    }
 
     @Override
     public String toString() {
-        return login + "(" + firstname + " " + lastname + " - " + role + ")";
+        return "login{" +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", role=" + role +
+                '}';
     }
 }
