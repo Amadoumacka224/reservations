@@ -61,4 +61,3 @@ Gestion des Commentaires : Les utilisateurs ont la possibilité de laisser des c
 - Langages : HTML, CSS
 - Framework CSS : Tailwind CSS
 - Langage de script : JavaScript
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
