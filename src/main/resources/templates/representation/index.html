@@ -5,7 +5,6 @@
     <title>Liste des représentations de spectacle</title>
 </head>
 <body>
-<<<<<<< HEAD
 <div class="container mx-auto py-8">
     <div layout:fragment="content">
         <h1 class="text-2xl font-bold mb-6" th:text="${title}">Liste des représentations de spectacle</h1>
@@ -43,24 +42,6 @@
                 </tbody>
             </table>
         </div>
-=======
-<div class="container">
-    <div layout:fragment="content">
-        <h1 th:text="${title}">Liste des représentations de spectacle</h1>
-
-        <ul th:unless="${#lists.isEmpty(representations)}">
-            <li th:each="representation : ${representations}">
-                <span th:text="${representation.show.title}">Ayiti</span>
-                <span th:if="${representation.location}"
-                      th:text="' - '+${representation.location.designation}">- Art Center</span>
-                <span th:text="${#temporals.format(representation.when,'dd-MM-yyyy')}">
-			12-10-2012</span>
-                <span th:text="${#temporals.format(representation.when,'HH:mm')}">
-			13:30</span>
-                <a th:href="@{/representations/{id}(id=${representation.id})}">View</a>
-            </li>
-        </ul>
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
     </div>
 </div>
 </body>

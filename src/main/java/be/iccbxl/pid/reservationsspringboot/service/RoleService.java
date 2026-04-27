@@ -1,24 +1,14 @@
 package be.iccbxl.pid.reservationsspringboot.service;
 
-<<<<<<< HEAD
-=======
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 import be.iccbxl.pid.reservationsspringboot.model.Role;
 import be.iccbxl.pid.reservationsspringboot.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-=======
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 @Service
 public class RoleService {
     @Autowired
@@ -53,10 +43,5 @@ public class RoleService {
 
         repository.deleteById(indice);
     }
-<<<<<<< HEAD
 
 }
-=======
-}
-
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a

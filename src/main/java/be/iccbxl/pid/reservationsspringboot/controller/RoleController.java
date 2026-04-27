@@ -1,10 +1,5 @@
 package be.iccbxl.pid.reservationsspringboot.controller;
 
-<<<<<<< HEAD
-=======
-import java.util.List;
-
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 import be.iccbxl.pid.reservationsspringboot.model.Role;
 import be.iccbxl.pid.reservationsspringboot.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-<<<<<<< HEAD
 import java.util.List;
 
-=======
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 @Controller
 public class RoleController {
     @Autowired

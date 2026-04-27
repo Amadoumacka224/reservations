@@ -7,18 +7,10 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-=======
-
-import jakarta.persistence.*;
-import lombok.Data;
-
-@Data
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 @Entity
 @Table(name = "users")
 public class User {
@@ -31,7 +23,6 @@ public class User {
     private String lastname;
     private String email;
     private String langue;
-<<<<<<< HEAD
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -91,74 +82,5 @@ public class User {
                 ", lastname='" + lastname + '\'' +
                 ", role=" + role +
                 '}';
-=======
-    private LocalDateTime created_at;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> roles = new ArrayList<>();
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_representation",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "representation_id")
-    )
-    private List<Representation> representations = new ArrayList<>();
-
-    protected User() {}
-
-    public User(String login, String firstname, String lastname) {
-        this.login = login;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.created_at = LocalDateTime.now();
-    }
-
-    // Les getters et setters générés par Lombok avec @Data
-    // ne sont pas nécessaires si vous gardez l'annotation @Data
-
-    public User addRole(Role role) {
-        if(!this.roles.contains(role)) {
-            this.roles.add(role);
-            role.getUsers().add(this);
-        }
-        return this;
-    }
-
-    public User removeRole(Role role) {
-        if(this.roles.contains(role)) {
-            this.roles.remove(role);
-            role.getUsers().remove(this);
-        }
-        return this;
-    }
-
-    public User addRepresentation(Representation representation) {
-        if(!this.representations.contains(representation)) {
-            this.representations.add(representation);
-            representation.addUser(this);
-        }
-
-        return this;
-    }
-
-    public User removeRepresentation(Representation representation) {
-        if(this.representations.contains(representation)) {
-            this.representations.remove(representation);
-            representation.getUsers().remove(this);
-        }
-
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return login + "(" + firstname + " " + lastname + ")";
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
     }
 }

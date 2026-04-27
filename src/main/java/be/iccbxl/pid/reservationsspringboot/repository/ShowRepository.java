@@ -1,6 +1,5 @@
 package be.iccbxl.pid.reservationsspringboot.repository;
 
-<<<<<<< HEAD
 import be.iccbxl.pid.reservationsspringboot.model.Location;
 import be.iccbxl.pid.reservationsspringboot.model.Show;
 import be.iccbxl.pid.reservationsspringboot.model.Tag;
@@ -34,17 +33,3 @@ public interface ShowRepository extends CrudRepository<Show, Long> {
             "WHERE s.bookable = true AND r.scheduledAt > CURRENT_TIMESTAMP")
     List<Show> findUpcomingShows();
 }
-=======
-import be.iccbxl.pid.reservationsspringboot.model.Show;
-import be.iccbxl.pid.reservationsspringboot.model.Location;
-import java.util.List;
-import java.util.Optional;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-@Repository
-public interface ShowRepository extends CrudRepository<Show, Long> {
-    Optional<Show> findBySlug(String slug);
-    Optional<Show> findByTitle(String title);
-    List<Show> findByLocation(Location location);
-}
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a

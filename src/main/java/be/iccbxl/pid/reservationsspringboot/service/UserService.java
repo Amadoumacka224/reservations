@@ -1,52 +1,51 @@
 package be.iccbxl.pid.reservationsspringboot.service;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b40d85abf2a6b9a0d4520f7c7f16a1e0739abc1a
 import be.iccbxl.pid.reservationsspringboot.model.User;
 import be.iccbxl.pid.reservationsspringboot.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository repository;
 
+    private final UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
+
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-
         repository.findAll().forEach(users::add);
-
         return users;
     }
+
+    @Transactional(readOnly = true)
     public User findByLogin(String login) {
-        return userRepository.findByLogin(login); // sans Optional
+        return repository.findByLogin(login);
     }
 
+    @Transactional(readOnly = true)
     public User getUser(String id) {
-        int indice = Integer.parseInt(id);
-
-        return repository.findById(indice);
+        return repository.findById(Long.parseLong(id));
     }
 
+    @Transactional
     public void addUser(User user) {
         repository.save(user);
     }
 
+    @Transactional
     public void updateUser(String id, User user) {
         repository.save(user);
     }
 
+    @Transactional
     public void deleteUser(String id) {
-        Long indice = (long) Integer.parseInt(id);
-
-        repository.deleteById(indice);
+        repository.deleteById(Long.parseLong(id));
     }
-
 }
-
