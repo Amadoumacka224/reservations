@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Application Web de Gestion de réservation de spectacles
 
 ## Contexte du Projet
